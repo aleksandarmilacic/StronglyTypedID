@@ -1,8 +1,6 @@
 ﻿ 
 
 
-public class OrderEntity : SoftDeletableEntity, IId<OrderId>
-{
-    public OrderId Id { get; set; }
-    // Other properties...
+public class OrderEntity : BaseIdSD<OrderId>
+{ 
 }

@@ -1,4 +1,4 @@
-﻿public struct BaseId<T> : IEquatable<BaseId<T>>, IComparable<BaseId<T>> where T : IComparable<T>
+﻿public struct BaseId<T> : IEquatable<BaseId<T>>, IComparable<BaseId<T>>
 {
     public T Value { get; }
 
@@ -39,6 +39,13 @@
 
     public int CompareTo(BaseId<T> other)
     {
-        return Value.CompareTo(other.Value);
+        // Check if T implements IComparable and if Value is not null
+        if (Value is IComparable comparable && other.Value != null)
+        {
+            return comparable.CompareTo(other.Value);
+        }
+
+        throw new InvalidOperationException(
+            $"The type {typeof(T).Name} does not implement IComparable.");
     }
 }
