@@ -1,4 +1,4 @@
-﻿public struct BaseId<T> : IEquatable<BaseId<T>>, IComparable<BaseId<T>>
+﻿public record struct BaseId<T> : IEquatable<BaseId<T>>, IComparable<BaseId<T>>
 {
     public T Value { get; }
 
@@ -7,10 +7,7 @@
         Value = value;
     }
 
-    public override bool Equals(object obj)
-    {
-        return obj is BaseId<T> other && Equals(other);
-    }
+  
 
     public bool Equals(BaseId<T> other)
     {
@@ -27,16 +24,7 @@
         return Value.ToString();
     }
 
-    public static bool operator ==(BaseId<T> left, BaseId<T> right)
-    {
-        return left.Equals(right);
-    }
-
-    public static bool operator !=(BaseId<T> left, BaseId<T> right)
-    {
-        return !(left == right);
-    }
-
+   
     public int CompareTo(BaseId<T> other)
     {
         // Check if T implements IComparable and if Value is not null
